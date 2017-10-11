@@ -1,0 +1,511 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Use case: Plone in multi-country, multi-language and multi-domain applications</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <style>
+      img {
+        border: 0 none !important;
+      }
+
+      .left {
+        left:-8.33%;
+        text-align: left;
+        float: left;
+        width:50%;
+        z-index:-10;
+      }
+
+      .right {
+        left:31.25%;
+        top: 75px;
+        float: right;
+        text-align: right;
+        z-index:-10;
+        width:50%;
+      }
+
+    </style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+
+
+          <h3>Use case: Plone in multi-{country, language, domain} applications</h3>
+          <img data-src="./img/ploneconf.svg" />
+          <p>
+            by Mikel Larreategi <br />
+            <a href="https://twitter.com/erralin">
+                  <i class="fa fa-twitter"></i>
+              </a>
+              <a href="https://github.com/erral">
+                  <i class="fa fa-github"></i>
+              </a>
+          </p>
+        </section>
+
+        <section>
+          <img data-src="./img/cs-team.jpeg" />
+
+          <aside class="notes">
+              I am Mikel Larreategi and work for CodeSyntax, an internet
+              company from Eibar in the Basque Country in norther Spain.
+
+              We are a group of 16 people working on the internet since 2001
+              and since the beginning we work with Python.
+          </aside>
+
+        </section>
+
+
+        <section>
+            <a href="https://www.codesyntax.com/eu"><img data-src="img/codesyntax-logo.png" /></a>
+            <br />
+            <img data-src="img/python-logo.png" /><br>
+            <a href="http://zope.org"><img data-src="img/zope-logo.png" /></a><br>
+            <a href="https://plone.org"><img data-src="img/plone-logo.png" /></a><br>
+            <img data-src="img/django-logo-negative.png" /><br>
+
+            <aside class="notes">
+
+
+                We started with plain Zope and back in 2005 started with Plone 2.1.
+                Then we have developed sites with all other Plone versions.
+
+                Our developers team is more or less 50%-50% of Django and Plone developers
+                although we do some other things too (mobile developments with angular
+                and ionic, some wordpress...)
+
+            </aside>
+
+        </section>
+
+
+
+
+        <section>
+
+          <img data-src="./img/ulma-construction.gif" />
+
+          <aside class="notes">
+            Some years ago a company came to us to ask a web platform. They wanted to get rid
+            of their manual website and start managing all the content using a CMS.
+
+            From the beginning they said that they wanted a multilingual solution because they
+            are a heavily internationalized company with a lot delegations and subsidiary branches
+            all over the world.
+
+          </aside>
+
+        </section>
+
+        <section>
+          <h2>Their needs</h2>
+          <ul>
+            <li class="fragment">
+              <strong>Multilingual:</strong> mysite.com/en, mysite.com/es, ...
+            </li>
+            <li class="fragment">
+              <strong>Multi-domain:</strong> <span class="fragment">mysite.de, mysite.es, mysite.com, ...</span>
+            </li>
+            <li class="fragment">
+              <strong>Multi-everything:</strong> <span class="fragment">mysite.com/en, mysite.com/es, mysite.es/es, mysite.es/eu</span>
+            </li>
+            <li class="fragment">
+              <strong>Centralized content-management:</strong> <span class="fragment">edit.mysite.com/en, edit.mysite.com/es, edit.mysite.com/es-es, ...</span>
+            </li>
+
+          </ul>
+
+
+          <aside class="notes">
+            They wanted this platform to be unique and centralized because they wanted to have
+            some central-control of the contents and permissions available to content-editors
+            on their subsidiaries.
+
+            They also wanted to be a multi-country and multi-domain solution. They wanted to create
+            as many sites as subsidiaries they have, and some of them to be multilingual.
+
+            They needed a multi-everything solution.
+          </aside>
+
+        </section>
+
+        <section>
+
+          <div class="left">
+            <img data-src="./img/plone-logo.png" />
+          </div>
+
+          <div class="right">
+            <ul>
+              <li>
+                Plone
+              </li>
+              <li>
+                Dexterity content-types
+              </li>
+              <li>
+                plone.app.multilingual
+              </li>
+              <li>
+                <a href="https://pypi.python.org/pypi/collective.linguadomains">
+                  collective.linguadomains
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <aside class="notes">
+            We decided to build a platform using Plone 4 and dexterity content-types.
+
+            For the multilingual solution we used plone.app.multilingual, which is the
+            default way to create multilingual sites these days.
+
+            To provide the additional multi-everything solutions we used some add-ons and hacks
+            because we faced some problems or limitations on Plone.
+
+          </aside>
+        </section>
+
+        <section>
+          <strong>Question:</strong> <br/>
+          how to create a site with 2 Spanish versions: one for the international targetting site
+          and the other one for the spanish site?
+
+          <aside class="notes">
+            The first question arose early on the development: we needed to have 2 spanish versions of the site
+            because the contents were not the same for the international site spanish version and the Spain site spanish version.
+          </aside>
+        </section>
+
+        <section>
+          <strong>Answer:</strong> <br/>
+          enable the "Show country-specific language variants" checkbox on Plone's
+          language control panel
+          <br/>
+          <img data-src="./img/plone-language-variants.png" />
+
+
+
+
+        </section>
+
+        <section>
+          <div class="left">
+            <img data-src="./img/plone-language-variants-example.png" />
+          </div>
+
+          <div class="right">
+              <a href="https://github.com/plone/plone.i18n/blob/master/plone/i18n/locales/languages.py">plone.i18n</a>
+
+              <br/><br/><br/>
+
+            <img data-src="./img/plone-language-variants-selection.png" />
+          </div>
+
+
+          <aside class="notes">
+            Well, this one was easy. Plone already supports language variants. It provides a language variant vocabulary
+            in plone.i18n.
+
+            There we can see the different language-variants, from arabic, to german, english, spanish or french to name a few.
+
+            So this way plone shows the Available Languages list with the full list of languages plus the language variants.
+            So we can choose to have a site in "Spanish" and in "Spanish-Spain" and "Spanish-Mexico"
+          </aside>
+
+        </section>
+
+        <section>
+          <strong>Question:</strong>
+          <br/>
+          how to create a site in English for Mexico? Does "English (Mexico)" (en-mx) exist?
+
+          <aside class="notes">
+            So far so good. But what to do with inexistent language-variants? For instance our client wanted
+            to create an english site for Mexico, different from the International English, US English and UK English.
+
+            But there is no such language variant like "English (Mexico)"
+          </aside>
+        </section>
+
+        <section>
+          <strong>Answer:</strong>
+          <br/>
+          no, it does not exist.
+          <br/>
+          <span class="fragment">But we can create a <em>language</em> for you</span>
+        </section>
+
+        <section>
+          Patch plone.i18n to extend the language variant vocabulary.<br/>
+          <span class="fragment">
+            We created: en-mx, en-fr, ru-kz
+          </span>
+
+          <aside class="notes">
+            So we created English (Mexico), English (France), Russian (Kazakhstan), ...
+            and opened the door to create additional languages for anything.
+
+            While you keep the first part of the language-variant code OK, Plone's language
+            negotiation works, so you don't have to worry about strange configurations.
+          </aside>
+
+        </section>
+
+        <section>
+          <strong>Question:</strong>
+          <br/>
+          OK, now we want to serve this site from several domains, but some domains should serve
+          only some languages
+        </section>
+
+        <section>
+          <strong>Answer:</strong>
+          <br/>
+          Let's use <a href="https://pypi.python.org/pypi/collective.linguadomains">collective.linguadomains</a>
+
+        </section>
+
+        <section>
+
+          <img data-src="./img/collective-linguadomains-configuration.png" />
+          <br/>
+          collective.linguadomains configuration
+
+          <br/><br/><br/><br/><br/><br/><br/><br/>
+
+          <aside class="notes">
+            collective.linguadomains provides a way to configure which languages of your site should be
+            served from which domain.
+
+            To achieve that it provides a control-panel configuration form and a viewlet that does
+            the checks and redirects accordingly
+
+          </aside>
+        </section>
+
+        <section>
+          <strong>collective.linguadomains is great!</strong>
+          <ul>
+            <li>It creates redirects for incorrect site-language combinations: mysite.fr/es -> mysite.com/es</li>
+            <li>You need to manualy override the language-selector viewlet if you want to show links instead of redirects</li>
+            <li>The same for the language-alternate viewlet</li>
+          </ul>
+          <aside class="notes">
+            collective.linguadomains controls if an end-user tries to show a language in an incorrect site.
+            For instance show Spanish (International) on France domain.
+
+            Our SEO-man wanted to change Plone's language change viewlet because currently it shows links to
+            a redirect view, and wanted to show directly the links to the correct sites, so we needed to override
+            it and call collective.linguadomains' utils to achieve that.
+
+          </aside>
+        </section>
+
+        <section>
+            <img data-src="./img/language-selector.png" />
+            <br/>
+            language selector with full domain URLs
+
+            <br/><br/><br/><br/><br/><br/><br/><br/>
+
+        </section>
+
+        <section>
+            <img data-src="./img/language-alternate-viewlet.png" />
+            <br/>
+            language alternate viewlet with full domain URLs
+            <br/>
+            <a href="https://support.google.com/webmasters/answer/189077?hl=en">guidelines by Google</a>
+            <br/><br/><br/><br/><br/><br/><br/>
+
+          <aside class="notes">
+            language alternate links are a way to signal Google and other search engines
+            that we have that content in another languages and sometimes targetting specific countries.
+
+            We don't know exactly how Google behaves regarding unexisting language-combination pairs,
+            but for the momment we haven't had any message about the negative impact of it.
+          </aside>
+
+        </section>
+
+        <section>
+          <div class="fragment">
+            <strong>Question:</strong>
+            <br/>
+            Can you do content-management for us? We will provide the content on different languages
+          </div>
+
+          <aside class="notes">
+            With all that, we built and published the site and some weeks later another client
+            came and asked for pretty much the same platform with a couple of additions:
+
+            the first one was: can you do content-management for us? We will provide the content
+          </aside>
+
+        </section>
+
+        <section>
+          <strong>Answer:</strong>
+          <br/>
+          Yes. We are going to use <a href="https://en.wikipedia.org/wiki/XLIFF">XLIFF</a> to handle the translations.
+
+          <aside class="notes">
+            XLIFF is an XML based format to standarize the format of data during the localization process
+            of it.
+
+          </aside>
+        </section>
+
+        <section>
+            <pre><code data-trim>
+            <trans-unit id="1">
+              <source xml:lang="en">Cannot find the file.</source>
+              <target xml:lang="fr">Fichier non trouvé.</target>
+            </trans-unit>
+              </code></pre>
+          <aside class="notes">
+            It's basically an XML file, with a lot of 'trans-units' like this one
+            were the content goes.
+
+            You can have HTML included in it and the translation aid tool should escape
+            all that HTML to let the translator only with the real content (not to translate
+            the HTML tags)
+          </aside>
+        </section>
+        <section>
+          <p>
+              <a href="https://pypi.python.org/pypi/slc.xliff">slc.xliff</a>
+          </p>
+          <ul>
+            <li>XLIFF integration for Plone</li>
+            <li>Both for importing and exporting</li>
+            <li>Both for Archetypes and Dexterity</li>
+            <li>One trans-unit per field</li>
+          </ul>
+
+          <aside class="notes">
+            Using this is very easy to export the contents of a page in XLIFF format
+            feed the translation aid tool with that and using the translations and the
+            translation-memory provided by the client prepare the files to import them back
+            to Plone
+          </aside>
+
+        </section>
+
+        <section>
+          <strong>Question:</strong>
+          <br/>
+          but what can we do with images or files linked from the translated HTML content?
+
+          <aside class="notes">
+            sometimes the content (remember that this is HTML) has images or linked files (which will
+            be properly added in Plone), and XLIFF "hides" the HTML from the translator to avoid him
+            translating HTML tags, so what can we do with this type of content? It requires us to
+            check if all the images and links are valid and change with the proper ones.
+          </aside>
+
+        </section>
+
+        <section>
+          <strong>Answer:</strong>
+          <br/>
+          use <a href="https://pypi.python.org/pypi/plone.outputfilters">plone.outputfilters</a>
+
+          <aside class="notes">
+            As you may know, plone.outputfilters provides a way to hook filters to text when it is rendered.
+            The tipical examples are to resolve the UID links (and hide the resolveuid lilnks), and provide
+            captions to images inserted using the TinyMCE editor.
+          </aside>
+
+        </section>
+
+        <section>
+          <img data-src="./img/outputfilters.png" alt="" />
+          <br/>
+          Override the ResolveUIDAndCaptionFilter to check if proper language content was inserted
+          <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+          <aside class="notes">
+            This way, when the resolveuid check is done, we check if the object is in the same language
+            of the context, and if not we link it to the proper object.
+
+            Of course, this requires to have all the items properly translated and file and image fields
+            marked as normal and not language-independent fields.
+          </aside>
+        </section>
+
+        <section>
+          <h3>To sum up</h3>
+          <ul>
+            <li>
+              Plone is perfect for multilingual content sites
+            </li>
+            <li>
+              It's easy to build powerful multi-site, multi-language sites
+            </li>
+            <li>
+              There are a lot of useful addons on the collective, just browse!
+            </li>
+            <li>
+              Pay attention to language-change URLs
+            </li>
+            <li>
+              Have Google in mind: redirects, proper language codes, alternate content links, ...
+            </li>
+          </ul>
+
+        </section>
+
+        <section>
+            <h3>Questions?</h3>
+            <img data-src="./img/questions.jpg" />
+            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+        </section>
+
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+        slideNumber: true,
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
